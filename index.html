@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Varun Gajula, AI/ML Engineer building agentic AI systems, RAG pipelines and ML on AWS.">
+<meta property="og:title" content="Varun Gajula | AI/ML Engineer">
+<meta property="og:description" content="Agentic AI, RAG and machine learning projects, certifications and experience.">
+<meta property="og:type" content="website">
+<title>Varun Gajula</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: stacked rounded cards on a cool ground, like a builder canvas; one card per section, projects as a 2-col grid */
+:root{
+  --bg:#eef0f4; --card:#ffffff; --fg:#141824; --muted:#5d6577; --line:#dfe3ea;
+  --accent:#2f54eb; --accent-soft:#e6ebff; --chip:#f3f5f9;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --r:22px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c0f16; --card:#151a24; --fg:#e9ecf3; --muted:#9aa3b6; --line:#252c3a;
+  --accent:#7d97ff; --accent-soft:#1d2540; --chip:#1b2130; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0c0f16; --card:#151a24; --fg:#e9ecf3; --muted:#9aa3b6; --line:#252c3a;
+  --accent:#7d97ff; --accent-soft:#1d2540; --chip:#1b2130; color-scheme:dark }
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;padding-inline:16px;padding-block:32px 64px}
+.wrap{max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 18px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* hero */
+.hero{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:start}
+.avatar{width:112px;height:112px;border-radius:20px;background:
+  radial-gradient(circle at 30% 25%,#8fa6ff 0,transparent 55%),linear-gradient(135deg,#2f54eb,#0f1a52);
+  display:grid;place-items:center;color:#fff;font-family:var(--display);font-weight:800;font-size:40px;letter-spacing:-.02em}
+.hero h1{font-size:clamp(30px,5vw,42px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.hero p{color:var(--muted);margin:10px 0 0;max-width:62ch}
+.hero .summary{display:flex;flex-direction:column;gap:12px;margin-top:14px;max-width:70ch}
+.hero .summary p{margin:0;max-width:none;text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;font-size:15.5px;line-height:1.7;color:var(--muted)}
+.hero .summary p.lead{font-size:17px;color:var(--fg)}
+@media (max-width:420px){.hero .summary p{text-align:left;hyphens:manual}}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.pill{font-family:var(--mono);font-size:12px;padding:5px 10px;border-radius:99px;background:var(--chip);color:var(--muted);border:1px solid var(--line)}
+.pill.live{color:var(--accent);background:var(--accent-soft);border-color:transparent}
+.pill.live::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:6px;vertical-align:1px}
+.theme-btn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--chip);color:var(--fg);cursor:pointer;display:grid;place-items:center}
+.theme-btn svg{width:18px;height:18px}
+
+/* skills marquee */
+.marquee{overflow:hidden;padding:16px 0;border-radius:var(--r);background:var(--card);border:1px solid var(--line);
+  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:28px;width:max-content;animation:slide 40s linear infinite}
+.track span{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;display:flex;align-items:center;gap:28px}
+.track span::after{content:"+";color:var(--accent)}
+@keyframes slide{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.track{animation:none}}
+
+/* projects */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.proj{display:flex;flex-direction:column;gap:12px;min-width:0}
+.proj.wide{grid-column:1/-1}
+.thumb{aspect-ratio:16/10;max-width:100%;border-radius:16px;border:1px solid var(--line);overflow:hidden;background:#0d1220}
+.proj.wide .thumb{aspect-ratio:21/8}
+.thumb svg{width:100%;height:100%;display:block}
+.proj h3{font-size:19px;font-weight:600}
+.proj p{margin:0;color:var(--muted);font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-family:var(--mono);font-size:11px;padding:3px 8px;border-radius:6px;background:var(--chip);color:var(--muted)}
+
+/* testimonial */
+.quote{font-family:var(--display);font-size:clamp(19px,2.6vw,23px);line-height:1.45;font-weight:400;margin:0 0 20px;max-width:60ch}
+.who{display:flex;gap:12px;align-items:center}
+.ini{width:42px;height:42px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:600;font-size:14px}
+.who b{display:block;font-weight:600}
+.who small{color:var(--muted)}
+
+/* certs */
+.certs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.cert{border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;min-width:0}
+a.cert{text-decoration:none;color:inherit;transition:border-color .15s}
+a.cert:hover{border-color:var(--accent)}
+a.cert small::after{content:" ↗";color:var(--accent)}
+.cert b{font-weight:600;font-size:15px;line-height:1.35}
+.cert small{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+
+/* career ladder */
+.ladder{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.step{display:grid;grid-template-columns:20px minmax(0,1fr);gap:16px;position:relative;padding-bottom:26px}
+.step:last-child{padding-bottom:0}
+.step::before{content:"";position:absolute;left:9px;top:22px;bottom:0;width:2px;background:var(--line)}
+.step:last-child::before{display:none}
+.dot{width:20px;height:20px;border-radius:50%;border:2px solid var(--accent);background:var(--card);margin-top:3px}
+.step:first-child .dot{background:var(--accent)}
+.role{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;align-items:baseline}
+.role h3{font-size:18px;font-weight:600}
+.role h3 span{color:var(--muted);font-weight:400}
+.dates{font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.step ul{margin:10px 0 0;padding-left:18px;color:var(--muted);font-size:15px;display:flex;flex-direction:column;gap:6px}
+.step ul li.more{display:none}
+.step.open ul li.more{display:list-item}
+.toggle{margin-top:8px;background:none;border:0;padding:0;color:var(--accent);font:500 14px var(--body);cursor:pointer}
+
+/* education + contact */
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.edu{display:flex;flex-direction:column;gap:16px}
+.edu b{display:block;font-weight:600}
+.edu small{color:var(--muted)}
+.contact h2{font-size:clamp(24px,3.5vw,30px);font-weight:800;letter-spacing:-.01em;margin-bottom:8px}
+.contact p{color:var(--muted);margin:0 0 18px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:var(--chip);color:var(--fg);font:500 14px var(--body);text-decoration:none;cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.mail{font-family:var(--mono);font-size:13px;color:var(--muted);margin:14px 0 0;user-select:all;overflow-wrap:anywhere}
+.toast{font-family:var(--mono);font-size:12px;color:var(--accent);min-height:18px;margin-top:10px}
+
+@media (max-width:680px){
+  .card{padding:22px}
+  .hero{grid-template-columns:1fr;gap:16px}
+  .hero .theme-btn{position:absolute;top:22px;right:22px}
+  .hero{position:relative}
+  .avatar{width:84px;height:84px;font-size:30px;border-radius:16px}
+  .grid,.two{grid-template-columns:1fr}
+  .proj.wide .thumb{aspect-ratio:16/10}
+  .certs{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:420px){.certs{grid-template-columns:1fr}}
+</style>
+<style>img{max-width:100%}</style>
+</head>
+<body>
+
+
+<div class="wrap">
+
+  <section class="card hero">
+    <div class="avatar" aria-hidden="true">VG</div>
+    <div>
+      <h1>Hey, I'm Varun</h1>
+      <div class="summary" lang="en">
+        <p class="lead">AI/ML Engineer with 5+ years of industry experience building and deploying LLM-powered applications, NLP pipelines (classification, summarization, embeddings), Retrieval-Augmented Generation (RAG) architectures, fine-tuning and machine learning systems that improve customer experience and operational efficiency.</p>
+        <p>Builds agentic AI systems on Amazon Bedrock AgentCore and the Strands framework, with multi-agent orchestration, tool calling to Lambda and DynamoDB microservices secured by OAuth 2.0 (Amazon Cognito), Model Context Protocol (MCP), RAG document search on OpenSearch Serverless, long-term memory, and Bedrock Guardrails for PII protection and safe outputs.</p>
+        <p>Experienced in developing and scaling AI solutions using Python, AWS, Hugging Face Transformers, LangChain, Pydantic, MLFlow, Docker, Kubernetes, and cloud-native infrastructure using Terraform, AWS CDK, Docker, and CI/CD pipelines.</p>
+        <p>Strong expertise in prompt engineering, model deployment, AI evaluation, observability, backend APIs, and production-grade AI systems in collaboration with cross-functional teams.</p>
+      </div>
+      <div class="meta">
+        <span class="pill live">Open to AI/ML roles</span>
+        <span class="pill">Dublin, Ireland</span>
+        <span class="pill">MSc Data Analytics, NCI</span>
+      </div>
+    </div>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+  </section>
+
+  <div class="marquee" aria-label="Skills">
+    <div class="track" id="track"></div>
+  </div>
+
+  <section class="card">
+    <p class="label">Projects</p>
+    <div class="grid">
+      <article class="proj">
+        <div class="thumb">
+          <svg viewBox="0 0 320 200" role="img" aria-label="Diagram of a supervisor agent routing to four tool services">
+            <rect width="320" height="200" fill="#0d1220"/>
+            <g stroke="#3a4a7a" stroke-width="1.5" fill="none">
+              <path d="M160 62 L60 130M160 62 L127 130M160 62 L193 130M160 62 L260 130"/>
+            </g>
+            <rect x="110" y="30" width="100" height="34" rx="8" fill="#2f54eb"/>
+            <text x="160" y="52" fill="#fff" font-family="monospace" font-size="11" text-anchor="middle">AgentCore</text>
+            <g font-family="monospace" font-size="9" fill="#c8d2ff" text-anchor="middle">
+              <rect x="30" y="130" width="60" height="28" rx="6" fill="#1a2340" stroke="#3a4a7a"/><text x="60" y="148">orders</text>
+              <rect x="97" y="130" width="60" height="28" rx="6" fill="#1a2340" stroke="#3a4a7a"/><text x="127" y="148">inventory</text>
+              <rect x="163" y="130" width="60" height="28" rx="6" fill="#1a2340" stroke="#3a4a7a"/><text x="193" y="148">shipping</text>
+              <rect x="230" y="130" width="60" height="28" rx="6" fill="#1a2340" stroke="#3a4a7a"/><text x="260" y="148">docs·RAG</text>
+            </g>
+            <text x="16" y="186" fill="#6b7aa8" font-family="monospace" font-size="9">Cognito OAuth 2.0 · Guardrails · long-term memory</text>
+          </svg>
+        </div>
+        <h3>AWS Supply Chain Enterprise AI Assistant</h3>
+        <p>An enterprise-grade supply chain assistant on Amazon Bedrock AgentCore and the Strands framework, with secure tool calls into Lambda and DynamoDB services and a document-search agent.</p>
+        <div class="tags"><span>Bedrock AgentCore</span><span>Strands</span><span>Cognito</span><span>OpenSearch</span></div>
+      </article>
+
+      <article class="proj">
+        <div class="thumb">
+          <svg viewBox="0 0 320 200" role="img" aria-label="Line of per-turn sentiment scores across a conversation">
+            <rect width="320" height="200" fill="#0d1220"/>
+            <g stroke="#1f2945" stroke-width="1"><path d="M30 50H300M30 100H300M30 150H300"/></g>
+            <g font-family="monospace" font-size="9" fill="#6b7aa8"><text x="8" y="53">+1</text><text x="10" y="103">0</text><text x="8" y="153">−1</text></g>
+            <path d="M30 110 L60 95 L90 120 L120 140 L150 118 L180 92 L210 78 L240 70 L270 62 L300 58" fill="none" stroke="#7d97ff" stroke-width="2.5" stroke-linejoin="round"/>
+            <g fill="#7d97ff"><circle cx="120" cy="140" r="3.5" fill="#ff8a6b"/><circle cx="300" cy="58" r="4.5"/></g>
+            <text x="16" y="186" fill="#6b7aa8" font-family="monospace" font-size="9">SQS → Fargate workers → S3 · DynamoDB</text>
+          </svg>
+        </div>
+        <h3>Conversational Analytics Platform</h3>
+        <p>A distributed pipeline that turns raw support transcripts into per-turn sentiment and conversation-level trend metrics, with idempotent, byte-reproducible outputs.</p>
+        <div class="tags"><span>Multilingual transformer</span><span>SQS</span><span>Fargate</span><span>DynamoDB</span></div>
+      </article>
+
+      <article class="proj wide">
+        <div class="thumb">
+          <svg viewBox="0 0 640 244" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Satellite tile with detection boxes around palm trees and building footprints">
+            <rect width="640" height="244" fill="#1b2a1f"/>
+            <g fill="#2b3d2c"><rect x="0" y="0" width="210" height="244"/><rect x="430" y="0" width="210" height="244"/></g>
+            <g fill="#4d5560"><rect x="250" y="30" width="60" height="44"/><rect x="330" y="26" width="70" height="52"/><rect x="250" y="110" width="80" height="50"/><rect x="350" y="120" width="54" height="40"/><rect x="270" y="186" width="120" height="36"/></g>
+            <g fill="#3f7a3f"><circle cx="60" cy="50" r="15"/><circle cx="120" cy="90" r="13"/><circle cx="70" cy="150" r="16"/><circle cx="160" cy="190" r="14"/><circle cx="500" cy="60" r="15"/><circle cx="560" cy="130" r="13"/><circle cx="480" cy="190" r="16"/></g>
+            <g fill="none" stroke-width="2"><g stroke="#ffd166"><rect x="43" y="33" width="34" height="34"/><rect x="105" y="75" width="30" height="30"/><rect x="52" y="132" width="36" height="36"/><rect x="144" y="174" width="32" height="32"/><rect x="483" y="43" width="34" height="34"/><rect x="545" y="115" width="30" height="30"/><rect x="462" y="172" width="36" height="36"/></g>
+            <g stroke="#7d97ff"><rect x="246" y="26" width="68" height="52"/><rect x="326" y="22" width="78" height="60"/><rect x="246" y="106" width="88" height="58"/><rect x="346" y="116" width="62" height="48"/><rect x="266" y="182" width="128" height="44"/></g></g>
+            <g font-family="monospace" font-size="10"><text x="43" y="29" fill="#ffd166">palm 0.94</text><text x="326" y="17" fill="#7d97ff">building 0.91</text></g>
+          </svg>
+        </div>
+        <h3>Palm Trees and Building Footprints from High-Resolution Satellite Imagery</h3>
+        <p>Object detection and segmentation on Landsat-8 and Sentinel-1 imagery using Single Shot Detector, Mask R-CNN, MMSegmentation and YOLOv3, with labels built in SageMaker Ground Truth.</p>
+        <div class="tags"><span>Mask R-CNN</span><span>SSD</span><span>YOLOv3</span><span>ArcGIS Pro</span><span>SageMaker</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="card">
+    <p class="label">Testimonials</p>
+    <p class="quote">“It felt like having an experienced co-founder on our side. He was an outstanding team leader, always willing to lend a helping hand, share knowledge, and collaborate on projects. He always kept us motivated, going above and beyond.”</p>
+    <div class="who">
+      <div class="ini" aria-hidden="true">BA</div>
+      <div><b><a href="https://www.linkedin.com/in/bhuvana-avula" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">Bhuvana Avula</a></b><small>Pinaca Technologies Pvt Ltd</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <p class="label">Certifications</p>
+    <div class="certs" id="certs"></div>
+  </section>
+
+  <section class="card">
+    <p class="label">Career ladder</p>
+    <ol class="ladder" id="ladder"></ol>
+  </section>
+
+  <div class="two">
+    <section class="card">
+      <p class="label">Education</p>
+      <div class="edu">
+        <div><b>MSc in Data Analytics</b><small>National College of Ireland, Dublin · 2023–2024</small></div>
+        <div><b>B.Tech, Electronics and Communication Engineering</b><small>JNTUH, India · 2014–2018</small></div>
+      </div>
+    </section>
+    <section class="card contact">
+      <p class="label">Contact</p>
+      <h2>Let's build something.</h2>
+      <p>Open to AI/ML and agentic AI engineering roles in Ireland and remote.</p>
+      <div class="btns">
+        <button class="btn primary" id="copyMail" type="button">Copy email</button>
+        <a class="btn" href="https://www.linkedin.com/in/varun-gajula/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <p class="mail" id="mailText">varun.gama00900vv@gmail.com</p>
+      <div class="toast" id="toast" aria-live="polite"></div>
+    </section>
+  </div>
+</div>
+
+<script>
+const EMAIL = "varun.gama00900vv@gmail.com";
+const skills = ["Python","Agentic AI","AI Agents","RAG","LangChain","MCP","Amazon Bedrock","SageMaker","PyTorch","TensorFlow","Hugging Face","OpenSearch Vector Search","Computer Vision","NLP","MLOps","Terraform","Docker","Kubernetes","SQL"];
+// Add each credential URL to "u" to make that card open it on click
+const certs = [
+  {n:"AWS Certified AI Practitioner",o:"AWS",u:"https://www.credly.com/badges/93d6a7a9-80b7-48a6-8230-6c5825fda610"},
+  {n:"AWS Agentic AI Demonstrated",o:"AWS",u:"https://www.credly.com/badges/6a36f4e9-5fb7-4c10-919b-5f7a1a7a8df9"},
+  {n:"AWS SimuLearn: AI Practitioner",o:"AWS",u:"https://www.credly.com/badges/53afc1a5-03ea-4857-a019-0e914c92f3c5"},
+  {n:"AWS Machine Learning Specialty",o:"Udemy",u:"https://www.udemy.com/certificate/UC-a5ec7021-36f8-4b45-a2ed-b1255a83ccba/"},
+  {n:"Certified Software Engineer",o:"HackerRank",u:"https://www.hackerrank.com/certificates/2f9ac0f25274"},
+  {n:"Hugging Face Agents Course",o:"Hugging Face",u:""}
+];
+document.getElementById("certs").innerHTML = certs.map(c => c.u
+  ? `<a class="cert" href="${c.u}" target="_blank" rel="noopener"><b>${c.n}</b><small>${c.o}</small></a>`
+  : `<div class="cert"><b>${c.n}</b><small>${c.o}</small></div>`).join("");
+const track = document.getElementById("track");
+track.innerHTML = [...skills, ...skills].map(s => `<span>${s}</span>`).join("");
+
+const jobs = [
+  {t:"Machine Learning Engineer",c:"HanviTec Solutions",d:"Jun 2025 — Present",b:[
+    "Architected and operated a distributed conversational sentiment-scoring pipeline on AWS (SQS, S3, DynamoDB, Fargate) with serverless workers, cost-based sharding and batching, and a multilingual transformer model, delivering idempotent, byte-reproducible outputs in production.",
+    "Built a multi-agent AI assistant on Amazon Bedrock AgentCore with OAuth 2.0 machine-to-machine login via Cognito, tool connections to four Lambda/DynamoDB microservices, a RAG document-search agent, long-term memory and Bedrock Guardrails.",
+    "Led an end-to-end computer vision pipeline for Landsat-8 and Sentinel-1 imagery using SageMaker Ground Truth, SSD and Mask R-CNN."]},
+  {t:"Machine Learning Engineer",c:"Pinaca Technologies",d:"Apr 2022 — Aug 2023",b:[
+    "Designed and commercialized production RAG pipelines with Transformers, LangChain and FAISS, improving user engagement by 30%.",
+    "Fine-tuned Hugging Face models (RoBERTa, DistilBERT) for domain text classification and entity extraction, deployed as production endpoints.",
+    "Built Random Forest and XGBoost models that reduced stock-outs by 18%.",
+    "Architected a RAG system on AWS for querying mutual fund reports with Bedrock (Claude), Titan Embeddings, OpenSearch Vector Search and Guardrails."]},
+  {t:"GIS Machine Learning Engineer",c:"Rsi Softech India",d:"Nov 2021 — Apr 2022",b:[
+    "Automated geospatial data processing and ML pipelines with ArcPy, PyTorch and ArcGIS Pro, cutting data preparation time by 45%.",
+    "Implemented scalable training workflows with SageMaker and Kubeflow.",
+    "Automated deployments with Terraform and AWS CDK in CI/CD."]},
+  {t:"Alexa Data Associate",c:"Amazon",d:"Aug 2020 — Jan 2021",b:[
+    "Built disaster recovery pipelines and alerting, reducing incident resolution time from 2 hours to under 30 minutes.",
+    "Supported real-time prediction APIs with sub-second response times.",
+    "Diagnosed recurring production issues with technical teams and communicated root causes."]},
+  {t:"ML Associate",c:"SocialTek AI ML Business Solutions",d:"Oct 2019 — Jul 2020",b:[
+    "Designed secure, containerized ML inference systems on AWS.",
+    "Developed ML and deep learning models with Python, TensorFlow, Keras, PyTorch and TorchVision.",
+    "Drove experimentation, model validation and deployment automation."]},
+  {t:"Transportation Specialist",c:"Amazon",d:"Oct 2018 — Oct 2019",b:[
+    "Managed SQL databases, billing and reporting workflows for transportation operations.",
+    "Worked with business and technical teams to improve workflow efficiency and reporting accuracy."]}
+];
+document.getElementById("ladder").innerHTML = jobs.map((j,i)=>`
+  <li class="step">
+    <span class="dot" aria-hidden="true"></span>
+    <div>
+      <div class="role"><h3>${j.t} <span>@ ${j.c}</span></h3><span class="dates">${j.d}</span></div>
+      <ul>${j.b.map((x,k)=>`<li class="${k>0?'more':''}">${x}</li>`).join("")}</ul>
+      ${j.b.length>1?`<button class="toggle" type="button" aria-expanded="false">View more</button>`:""}
+    </div>
+  </li>`).join("");
+document.querySelectorAll(".toggle").forEach(b=>b.addEventListener("click",()=>{
+  const s=b.closest(".step"); const open=s.classList.toggle("open");
+  b.textContent=open?"View less":"View more"; b.setAttribute("aria-expanded",open);
+}));
+
+const root=document.documentElement;
+document.getElementById("themeBtn").addEventListener("click",()=>{
+  const cur=root.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light");
+  root.dataset.theme = cur==="dark"?"light":"dark";
+});
+
+const toast=document.getElementById("toast");
+document.getElementById("copyMail").addEventListener("click",()=>{
+  navigator.clipboard.writeText(EMAIL).then(()=>toast.textContent="Copied "+EMAIL)
+    .catch(()=>toast.textContent=EMAIL);
+});
+</script>
+
+</body>
+</html>
